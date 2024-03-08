@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ce-block__content, 
+.ce-toolbar__content {
+    @apply prose;
+    max-width: 1400px;  
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 2px;
+}
+ 
+::-webkit-scrollbar-track {
+    background: #888;
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 5px;
+}
+ 
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
