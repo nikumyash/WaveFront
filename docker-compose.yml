@@ -46,8 +46,6 @@ services:
     volumes:
       - ./nginx:/etc/nginx/conf.d
       - prod_client:/usr/share/nginx/html
-    # networks: 
-    #   - shared_network
     depends_on:
       - api
       - client
