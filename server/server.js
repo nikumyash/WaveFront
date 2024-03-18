@@ -24,10 +24,12 @@ admin.initializeApp({
 
 app.use(cors({origin:"http://localhost:5173",methods:['GET', 'PUT', 'POST','DELETE'],credentials:true}));
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({limit:50*1024*1024}));
 app.use(express.urlencoded({extended:true}));
 
-
+app.get('/health',(req,res)=>{
+  res.status(200).json({status:"Server is active"});
+})
 app.use('/auth',authRouter);
 app.use('/blog',blogRouter);
 app.use('/user',userRouter);
@@ -39,6 +41,6 @@ app.use('*',(req,res)=>{
     res.status(404).json({success:false,error:"Page not found"})
 })
 
-app.listen(process.env.PORT || 6969,()=>{
+app.listen(process.env.PORT || 3000,()=>{
     console.log("Listening to port no",process.env.PORT);
 })

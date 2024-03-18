@@ -137,7 +137,7 @@ const authWithGoogle = async(req,res)=>{
             const curUser = await User.findOne({email:email});        
             const newHash = nanoid(32);
             if(curUser){
-                curUser.profileImg  = picture ||curUser.profileImg;
+                curUser.profileImg  = picture || curUser.profileImg;
                 curUser.displayName = name || curUser.displayName;
                 const accessToken = generateAccessToken({email:email});
                 generateRefreshToken({email:email},res);
