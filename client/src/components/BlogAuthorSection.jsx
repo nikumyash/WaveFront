@@ -17,7 +17,7 @@ const BlogAuthorSection = () => {
   return (
     <section className="w-screen bg-gray-100 py-12">
         <div className='w-full mx-auto max-w-[700px]'>
-            <div className="w-full pb-8">
+            <div className="w-full px-4 pb-8">
                 <div className="flex items-center justify-between px-4">
                   <div onClick={()=>navigateTo("/u/"+data?.author?.username)} className="h-20 w-20 cursor-pointer rounded-full overflow-hidden">
                     <img src={data?.author?.profileImg} className="h-full w-full object-cover"/>
@@ -49,7 +49,7 @@ const BlogAuthorSection = () => {
                 ))}
               </div>
             </div>)}
-            {data && <div onClick={()=>navigateTo("/u/"+data.author.username)} className="py-1 mt-8 px-2 rounded-full cursor-pointer border border-gray-500 my-4 w-fit">Read more from {data?.author?.name}</div>}
+            {data && <div onClick={()=>navigateTo("/u/"+data.author.username)} className="py-1 mt-8 mx-4 px-2 rounded-full cursor-pointer border border-gray-500 my-4 w-fit">Read more from {data?.author?.name}</div>}
         </div>
     </section>
   )

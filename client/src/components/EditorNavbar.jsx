@@ -24,7 +24,7 @@ const EditorNavbar = ({edit,slug,publishForm,setPublishForm}) => {
                 {title || "New Draft"}
             </p>
             <div className='flex gap-4 ml-auto'>
-                <button onClick={checkContents} className="flex items-center justify-center whitespace-nowrap bg-green-700 text-white text-sn rounded-full px-2 hover:bg-opacity-80">
+                <button onClick={checkContents} className="flex items-center justify-center whitespace-nowrap bg-green-700 text-white text-sm rounded-full px-2 hover:bg-opacity-80">
                     Publish
                 </button>
                 {publishForm && createPortal(<PublishForm slug={slug} edit={edit} isOpen={publishForm} setOpen={setPublishForm}/>,document.body)}

@@ -21,7 +21,7 @@ const EditorPage = () => {
   return (
     <section>
       <EditorNavbar publishForm={publishForm} setPublishForm={setPublishForm}/>
-      <div className={`max-w-3xl mx-auto ${publishForm?"hidden":""}` }>
+      <div className={`max-w-3xl px-2 mx-auto ${publishForm?"hidden":""}` }>
         <div className="mt-8 mb-2">
           <TextArea onKeyDown={handleTextArea} maxLength={150} onChange={(e)=>dispatch(setTitle(e.target.value))} placeholder="Title" className="resize-none focus:border-l w-full h-auto pl-4 focus:border-gray-500 text-gray-500 outline-none text-4xl font-thin font-serif"/>  
         </div>
