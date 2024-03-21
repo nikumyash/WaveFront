@@ -3,6 +3,8 @@ import { useCallback } from "react";
 import {useNavigate} from "react-router-dom";
 import { customAxios } from "../utils/axios";
 import notify from "react-hot-toast";
+import {useSelector,useDispatch} from "react-redux"
+import { setSigninModal } from "../slice/modalSlice";
 
 // eslint-disable-next-line react/prop-types
 const ProfileInfo = ({user,setProfileInfo,username,totalFollowers,isFollowed,isSelf}) => {
@@ -18,21 +20,33 @@ const ProfileInfo = ({user,setProfileInfo,username,totalFollowers,isFollowed,isS
     }
     return num;
   },[]);
+  const navigateTo = useNavigate();
+  const userInfo = useSelector(state=>state.user.user);
+  const dispatch = useDispatch();
   const handleFollow = ()=>{
-    customAxios.post("/user/"+username+"/follow").then((res)=>{
+    if(!userInfo){
+      dispatch(setSigninModal({isOpen:true,data:null}));
+      navigateTo("/");
+      return;
+    }
+    customAxios.post("/user/"+username+"/follow").then(()=>{
       setProfileInfo(state=>{return {...state,user:{...user,totalFollowers:totalFollowers+1},isFollowed:true}})
     }).catch(()=>{
       notify("Something went wrong");
     })
   }
   const handleUnfollow = ()=>{
+    if(!userInfo){
+      dispatch(setSigninModal({isOpen:true,data:null}));
+      navigateTo("/");
+      return;
+    }
     customAxios.post("/user/"+username+"/unfollow").then((res)=>{
       setProfileInfo(state=>{return {...state,user:{...user,totalFollowers:totalFollowers-1},isFollowed:false}})
     }).catch(()=>{
       notify("Something went wrong");
     })
   }
-  const navigateTo = useNavigate();
   return (
     <div className="mx-4 w-full flex flex-col">
         <div className="h-28 w-28 overflow-hidden bg-gray-300 rounded-full">
