@@ -1,5 +1,7 @@
 # WaveFront
 
+[_Click here to see like website_](http://ec2-43-204-197-217.ap-south-1.compute.amazonaws.com/)
+
 ## _Article publishing platform_
 
 A medium like article publishin platform made using MERN stack.
@@ -35,5 +37,6 @@ A medium like article publishin platform made using MERN stack.
 ## Planned Features
 
 - Notifications on post upload for all the users which are following you.
+- Add domain name, to enable https.(can't afford to buy a domain now and lets encrypt does not support aws public dns domain).
 
 
