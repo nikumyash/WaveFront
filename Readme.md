@@ -9,6 +9,7 @@ A medium like article publishin platform made using MERN stack.
 ## Technologies Used
 
 - AWS EC2 (for deployment)
+- AWS S3 (as an object storage)
 - Express (Nodejs)
 - React
 - Redux
@@ -32,6 +33,7 @@ A medium like article publishin platform made using MERN stack.
 - Views on a blog are only counted once every 6 hours. No repeat views under 6 hours window per user.
 - Users can follow unfollow authors.
 - Dedicated Profile Page where we can see all previour Blogs of the user.
+- Implemented AWS signed url for image upload for efficient client-aws upload without increasing server ingres.
 - Search  functionality to search for particular blogs,authors,topics.
 
 ## Planned Features
