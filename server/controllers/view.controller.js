@@ -30,8 +30,10 @@ const addView = async(req,res)=>{
         const checkView = await redis.get(blogId+":"+uuid);
         if(checkView)return res.status(200).json({status:"Ok"});
         await redis.set(blogId+":"+uuid,1,"EX",6*60*60);
-        const newView = View({blogId:curBlog._id,user:req.user._id});
-        await newView.save();
+        if(req?.user){
+            const newView = View({blogId:curBlog._id,user:req.user._id});
+            await newView.save();
+        }
         res.status(200).json({status:"Ok"});
         await Blog.findOneAndUpdate({_id:curBlog._id},{"$inc":{'metadata.totalViews':1}});
     }catch(e){  
