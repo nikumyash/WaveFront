@@ -255,6 +255,7 @@ const deleteBlog = async(req,res)=>{
             }
         }));
         await Like.deleteMany({blogId:curBlog._id});
+        await View.deleteMany({blogId:curBlog._id});
     }catch(e){
         console.log(e);
         return res.status(500).json({error:"Something went wrong"});
