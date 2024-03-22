@@ -9,7 +9,7 @@ const ShareBlogPopover = ({isEditable,blogId}) => {
     const navigateTo = useNavigate();
     const handleDelete = ()=>{
         customAxios.post("/blog/"+blogId+"/delete").then(()=>{
-            navigateTo("/");
+            window.location.reload();
         }).catch(()=>{
             notify("Something went wrong.");
         })

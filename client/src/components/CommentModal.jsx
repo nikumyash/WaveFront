@@ -1,7 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import {useSelector,useDispatch} from "react-redux"
 import notify from "react-hot-toast";
-import { setCommentModal } from "../slice/modalSlice";
+import { setCommentModal,setSigninModal } from "../slice/modalSlice";
 import TextArea from "react-textarea-autosize";
 import Comment from "./Comment";
 import timeSetter from "./../utils/time";
@@ -15,6 +15,7 @@ const CommentModal = () => {
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
   const modalData = useSelector(state=>state.modal.commentModal);
+  const curUser = useSelector(state=>state.user.user);
   const [commentData,setCommentData] = useState("");
   const [parentComment,setParentComment] = useState();
   const [comments,setComments] = useState([]);
@@ -78,6 +79,11 @@ const CommentModal = () => {
       navigateTo("/u/"+parentComment?.commentedBy?.username);
       }
     const handleCommentSubmit = ()=>{
+        if(!curUser){
+            dispatch(setSigninModal({isOpen:true,data:null}));
+            navigateTo("/");
+            return;
+        }
       customAxios.post("/comment/new",{blogId:modalData.data.curBlog,parentCommentId:modalData.data.parentComment,content:commentData}).then((res)=>{
           setComments(state=>[res?.data?.comment,...state])
           setCommentData("");

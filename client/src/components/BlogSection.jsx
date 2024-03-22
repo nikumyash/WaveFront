@@ -5,12 +5,13 @@ import notify from "react-hot-toast";
 import Output from "editorjs-react-renderer"
 import ShareBlogPopover from "./ShareBlogPopover";  
 import {useNavigate,Link} from "react-router-dom"
-import {useDispatch} from "react-redux";
+import {useDispatch,useSelector} from "react-redux";
 import { setCommentModal } from '../slice/modalSlice';
-
+import { setSigninModal } from '../slice/modalSlice';
 
 const BlogSection = () => {
     const {slug} = useParams();
+    const curUser = useSelector(state=>state.user.user);
     const dispatch = useDispatch();
     const navigateTo = useNavigate();
     const [blog,setBlog] = useState(null);
@@ -23,7 +24,12 @@ const BlogSection = () => {
         })
     },[slug,navigateTo]);
     const handleLike = ()=>{
-        customAxios.post("/blog/"+slug+"/like").then(res=>{
+        if(!curUser){
+            dispatch(setSigninModal({isOpen:true,data:null}));
+            navigateTo("/");
+            return;
+        }
+        customAxios.post("/blog/"+slug+"/like").then(()=>{
             let tempBlog = {...blog};
             tempBlog.blog.metadata.totalLikes+=1;
             tempBlog.isLiked = true;
@@ -33,7 +39,12 @@ const BlogSection = () => {
         })
     }
     const handleUnlike = ()=>{
-        customAxios.post("/blog/"+slug+"/unlike").then(res=>{
+        if(!curUser){
+            dispatch(setSigninModal({isOpen:true,data:null}));
+            navigateTo("/");
+            return;
+        }
+        customAxios.post("/blog/"+slug+"/unlike").then(()=>{
             let tempBlog = {...blog};
             tempBlog.blog.metadata.totalLikes-=1;
             tempBlog.isLiked = false;

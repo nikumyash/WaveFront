@@ -44,6 +44,7 @@ const ManageBlogs = () => {
         window.addEventListener("scroll",onScroll);
         return ()=>window.removeEventListener("scroll",onScroll);
       },[])
+      console.log(blogs);
     return (
     <div className="w-full">
         <div className="w-full h-48 flex-col flex gap-2 mt-4 justify-center items-center">
